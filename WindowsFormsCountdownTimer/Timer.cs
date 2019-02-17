@@ -7,8 +7,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
 
 namespace WindowsFormsCountdownTimer
 {
@@ -19,22 +20,10 @@ namespace WindowsFormsCountdownTimer
         public Timer()
         {
             InitializeComponent();
+            updateTimerLabels();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+      
 
         #region Numerics
         private void numericSeconds_ValueChanged(object sender, EventArgs e)
@@ -65,7 +54,7 @@ namespace WindowsFormsCountdownTimer
             CooldownTimer.Start();
             CooldownTimer.Enabled = true;
 
-            
+            updateTimerLabels();
 
             buttonStart.Enabled = false;
             buttonPause.Enabled = true;
@@ -105,8 +94,59 @@ namespace WindowsFormsCountdownTimer
             if (buttonPause.Text == "Resume")
                 buttonPause.Text = "Pause";
         }
-        
+
         #endregion
+        #region Timer
+        private void CooldownTimer_Tick(object sender, EventArgs e)
+        {
+            if(Cooldown > 0)
+                Cooldown--;
+            else
+            {
+                CooldownTimer.Stop();
+                CooldownTimer.Enabled = false;
+
+                buttonStart.Enabled = true;
+                buttonPause.Enabled = false;
+                buttonStop.Enabled = false;
+            }
+        }
+        #endregion
+
+        private void updateTimerLabels()
+        {
+            if (Cooldown > 0)
+            {
+                TimeSpan t = TimeSpan.FromSeconds(Cooldown);
+                string[] timeSplit = t.ToString().Split(':');
+                Hours.Text = timeSplit[0];
+                Minutes.Text = timeSplit[1];
+                Seconds.Text = timeSplit[2];
+            }
+            else
+            {
+                if (numericSeconds?.Value !=null)
+                    Seconds.Text = numericSeconds.Value.ToString();
+                if (numericMinutes?.Value != null)
+                    Minutes.Text = numericMinutes.Value.ToString();
+                if (numericHours?.Value != null)
+                    Hours.Text = numericHours.Value.ToString();
+            }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }
