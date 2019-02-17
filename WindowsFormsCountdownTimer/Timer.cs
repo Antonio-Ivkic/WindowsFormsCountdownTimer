@@ -12,6 +12,8 @@ namespace WindowsFormsCountdownTimer
 {
     public partial class Timer : Form
     {
+        private int Cooldown;
+
         public Timer()
         {
             InitializeComponent();
@@ -31,5 +33,25 @@ namespace WindowsFormsCountdownTimer
         {
 
         }
+
+        #region Numerics
+        private void numericSeconds_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericSeconds?.Value != null)
+                Seconds.Text = numericSeconds.Value.ToString();
+        }
+
+        private void numericMinutes_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericMinutes?.Value != null)
+                Minutes.Text = numericMinutes.Value.ToString();
+        }
+
+        private void numericHours_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericHours?.Value != null)
+                Hours.Text = numericHours.Value.ToString();
+        }
+        #endregion
     }
 }
