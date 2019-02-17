@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.CooldownTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numericSeconds = new System.Windows.Forms.NumericUpDown();
@@ -55,10 +55,10 @@
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // timer1
+            // CooldownTimer
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.CooldownTimer.Interval = 1000;
+            this.CooldownTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // groupBox1
             // 
@@ -244,6 +244,7 @@
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // Timer
             // 
@@ -271,7 +272,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer CooldownTimer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericSeconds;
